@@ -34,13 +34,18 @@ class Rob():
 
     def _rob_once(self):
         time.sleep(DELAY)
-        pyautogui.click(self.point_balance.x, self.point_balance.y)
+        pyautogui.moveTo(self.point_balance.x, self.point_balance.y)
+        time.sleep(0.2)
+        pyautogui.click()
         time.sleep(DELAY)
-        pyautogui.click(x=self.point_barter.x, y=self.point_barter.y)
+        pyautogui.moveTo(x=self.point_barter.x, y=self.point_barter.y)
+        time.sleep(0.2)
+        pyautogui.click()
     
-    def start(self):
+    def start(self, running):
         times = 1
-        while times < 10:
+        while running.is_set():
+            Utils.log(f"Current running is: {running}", LogLevel.DEBUG)
             Utils.log(f"Current robbing times is: {times}", LogLevel.INFO)
             self._rob_once()
             times = times + 1
